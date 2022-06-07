@@ -1,0 +1,106 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+{% block content %}
+<!-- Shop Page Start  -->
+<div class="shop-category-area pt-100px pb-100px">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9 order-lg-last col-md-12 order-md-first">
+                <!-- Shop Bottom Area Start -->
+                <div class="shop-bottom-area">
+                    <!-- Tab Content Area Start -->
+                    <div class="row">
+                        <div class="col">
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" id="shop-grid">
+                                    <div class="row mb-n-30px">
+                                    {% if products %}
+                                        {% for product in products %}
+                                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 mb-30px">
+                                            <!-- Single Product -->
+                                            <div class="product">
+                                                <div class="thumb">
+                                                    <a href="{{ product.get_absolute_url }}" class="image">
+                                                        <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "shop/images/no_image.png" %}{% endif %}" alt="">
+                                                        <img class="hover-image" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "shop/images/no_image.png" %}{% endif %}" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="content">
+                                                    <span class="category"><a href="{{ product.category.get_absolute_url }}">{{ product.category }}</a></span>
+                                                    <h5 class="title"><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h5>
+                                                    <span class="price">
+                                                    <span class="new">UAH {{ product.price }}</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    {% else %}
+                                        <p>Немає товарів для відображення</p>
+                                    {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tab Content Area End -->
+                    <!--  Pagination Area Start -->
+                <div class="pro-pagination-style text-center text-lg-end" data-aos="fade-up" data-aos-delay="200">
+                    <div class="pages">
+                        <ul>
+                        {% if products %}
+                        {% if page_obj.has_previous %}
+                        <li class="li"><a class="page-link" href="?page={{ page_obj.previous_page_number }}"><i class="fa fa-angle-left"></i></a></li>
+                        {% endif %}
+                            {% for p in page_obj.paginator.page_range %}
+                                {% if page_obj.number == p %}
+
+                                <li class="li"><a class="page-link active" href="?page={{ p }}">{{ p }}</a></li>
+                                {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2  %}
+                                <li class="li"><a class="page-link" href="?page={{ p }}">{{ p }}</a></li>
+
+                                {% endif %}
+                            {% endfor %}
+                        {% if page_obj.has_next %}
+                        <li class="li"><a class="page-link" href="?page={{ page_obj.next_page_number }}"><i class="fa fa-angle-right"></i></a></li>
+                        {% endif %}
+                        {% endif %}
+                        </ul>
+                    </div>
+                </div>
+                    <!--  Pagination Area End -->
+                </div>
+                <!-- Shop Bottom Area End -->
+            </div>
+            <!-- Sidebar Area Start -->
+            <div class="col-lg-3 order-lg-first col-md-12 order-md-last">
+                <div class="shop-sidebar-wrap">
+                    <!-- Sidebar single item -->
+                    <div class="sidebar-widget">
+                        <h4 class="sidebar-title">Категорії</h4>
+                        <div class="sidebar-widget-category">
+                            <ul>
+                                <li {% if not category %} class="selected m-0"{% endif %}>
+                                    <p><a href="{% url "shop:product_list" %}">ВСІ ТОВАРИ</a></p>
+                                    <br>
+                                </li>
+                                {% for c in categories %}
+                                    <li {% if category.slug == c.slug %} class="selected m-0" {% endif %}>
+                                        <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Sidebar single item -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Shop Page End  -->
+
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}
+Контакти
+{% endblock %}
+{% block content %}
+
+<div class="contact-area">
+    <div class="container">
+        <div class="contact-wrapper">
+            <div class="row">
+                <div class="col-12">
+                    <div class="contact-form">
+                        <div class="contact-title mb-30">
+                            <h2 class="title">Написати нами</h2>
+                        </div>
+                        <form class="contact-form-style" id="contact-form" method="POST">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                                <div class="col-lg-12 text-center">
+                                    <button class="btn btn-primary" type="submit">Відправити</button>
+                                </div>
+                        </form>
+                        <p class="form-messege"></p>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="contact-info">
+                        <div class="single-contact">
+                            <div class="icon-box">
+                                <img src="{% static 'shop/images/icons/contact-1.png' %}" alt="">
+                            </div>
+                            <div class="info-box">
+                                <h5 class="title">Адреса</h5>
+                                <p>м. Одеса<br>
+                                вул. Одеська, 123</p>
+                            </div>
+                        </div>
+                        <div class="single-contact">
+                            <div class="icon-box">
+                                <img src="{% static 'shop/images/icons/contact-2.png' %}" alt="">
+                            </div>
+                            <div class="info-box">
+                                <h5 class="title">Телефон</h5>
+                                <p><a href="tel:0800123456">0800 123 456</a></p>
+                                <p><a href="tel:+380123456789">+38012 345 6789</a></p>
+                            </div>
+                        </div>
+                        <div class="single-contact m-0">
+                            <div class="icon-box">
+                                <img src="{% static 'shop/images/icons/contact-3.png' %}" alt="">
+                            </div>
+                            <div class="info-box">
+                                <h5 class="title">Email/Web</h5>
+                                <p><a href="mailto:demo@example.com">demo@example.com</a></p>
+                                <p><a href="https://www.example.com">www.example.com</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

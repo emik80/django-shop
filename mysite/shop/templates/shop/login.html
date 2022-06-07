@@ -1,0 +1,42 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+{% block title %}Вхід{% endblock %}
+{% block content %}
+<div class="login-register-area pt-100px pb-100px">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 col-md-12 ml-auto mr-auto">
+                <div class="login-register-wrapper">
+                    <div class="login-register-tab-list nav">
+                        <a href="#" class="active">
+                            <h4>Авторизація</h4>
+                        </a>
+                    </div>
+                    <div class="tab-content">
+                        <div id="lg2" class="tab-pane active">
+                            <div class="login-form-container">
+                                <div class="contact-form">
+                                    <form class="contact-form-style" method="post">
+                                    {% csrf_token %}
+                                    <div class="form-error">{{ form.non_field_errors }}</div>
+                                        {% for f in form %}
+                                        <p>{{ f }}</p>
+                                        <div class="form-error">{{ f.errors }}</div>
+                                        {% endfor %}
+                                        <div class="button-box">
+                                            <button class="btn btn-primary" type="submit"><span>Увійти</span></button>
+                                        </div>
+                                        <div class="">
+                                            <p><br><a href="{% url "shop:register" %}">В мене немає акаунту</a></p>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

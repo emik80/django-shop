@@ -1,0 +1,28 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+{% block content %}
+<div class="about-area pt-100px">
+{#    <div class="container">#}
+    <div class="container" style="background-image: url({% static '/shop/images/main_cases1.png' %});
+        background-repeat: no-repeat; background-size: cover">
+        <div class="row">
+            <div class="col-12">
+                <div class="about-wrapper text-center">
+                    <div class="about-contant">
+                        <h2 class="title">
+                            <span>Інтернет-магазин</span>
+                            "Custom Showcase"
+                        </h2>
+                        <p>Це простір, що об'єднує найкрутіші та найпопулярніші товари для ентузіастів. Не важливо, в якому з ігрових всесвітів ти проводиш найбільше годин, фанатієш від Marvel або DC Comics, постійно переглядаєш Harry Potter і Star Wars, або ж є членом фандомів легендарних аніме One Piece, Dragon Ball або Naruto. Тут знайдуться товари для всіх.</p><p> Це місце, де з тобою розмовляють однією мовою та поділяють твої захоплення. Адже тут працюють такі ж фанати кастому, як і ти.</p>
+                    </div>
+                    <div class="promo-video">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

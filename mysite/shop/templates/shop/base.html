@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My shop{% endblock %}</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'shop/images/favicon.ico' %}">
+    <!-- CSS
+    ============================================ -->
+    <link rel="stylesheet" href="{% static 'shop/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'shop/css/font.awesome.css' %}">
+    <link rel="stylesheet" href="{% static 'shop/css/pe-icon-7-stroke.css' %}">
+    <link rel="stylesheet" href="{% static 'shop/css/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'shop/css/swiper-bundle.min.css' %}">
+    <link rel="stylesheet" href="{% static 'shop/css/venobox.css' %}">
+    <link rel="stylesheet" href="{% static 'shop/css/jquery-ui.min.css' %}">
+    <link rel="stylesheet" href="{% static 'shop/css/style.css' %}">
+</head>
+
+<body>
+    <div class="main-wrapper">
+        <header>
+            <!-- Header action area start -->
+            <div class="header-bottom  d-none d-lg-block">
+                <div class="container">
+                    <div class="row justify-content-between align-items-center">
+                        <div class="col-lg-3 col">
+                            <div class="header-logo">
+                                <a href="/">"Custom Showcase"</a>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="welcome-text-2">
+                                <p class="">Безкоштовна доставка замовлень!</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col">
+                            <div class="header-actions">
+                                {% with total_items=cart|length %}
+                                    <a href="{% url "cart:cart_detail" %}" class="header-action-btn header-action-btn-cart offcanvas-toggle pr-0">
+                                    <i class="pe-7s-shopbag"></i>
+                                        <span class="header-action-num">{{ total_items }}</span>
+                                    </a>
+                                {% endwith %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Header action area end -->
+            <!-- header navigation area start -->
+            <div class="header-nav-area d-none d-lg-block sticky-nav">
+                <div class="container">
+                    <div class="header-nav">
+                        <div class="main-menu position-relative">
+                            <ul>
+                                <li><a href="/">Головна</a></li>
+                                <li><a href="{% url 'shop:about' %}">Про нас</a></li>
+                                <li><a href="{% url 'contact_form:contact_form' %}">Контакти</a></li>
+                            {% if request.user.is_authenticated %}
+                                <li><a href="{% url 'shop:account' %}">Кабінет</a></li>
+                                <li><a href="{% url 'shop:logout' %}"><i class="fa fa-user"></i> Вийти</a></li>
+                            {% else %}
+                                <li><a href="{% url 'shop:login' %}"><i class="fa fa-user"></i> Вхід</a></li>
+                            {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- header navigation area end -->
+        </header>
+
+        {% block content %}
+        {% endblock %}
+
+        <!-- Footer Area Start -->
+        <div class="footer-area">
+            <div class="footer-container">
+                <div class="footer-top">
+                    <div class="container">
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <div class="container">
+                        <div class="line-shape-top line-height-1">
+                            <div class="row flex-md-row-reverse align-items-center">
+                                <div class="col-md-6 text-center text-md-end"></div>
+                                <div class="col-md-6 text-center text-md-start">
+                                    <p class="copy-text"> © 2022 <strong>"Custom Showcase"</strong> Made With <i class="fa fa-heart"
+                                        aria-hidden="true"></i></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer Area End -->
+    </div>
+    <!-- Global Vendor, plugins JS -->
+    <!-- JS Files
+    ============================================ -->
+    <script src="{% static 'shop/js/vendor/bootstrap.bundle.min.js' %}"></script>
+{#    <script src="{% static 'shop/js/vendor/jquery-3.6.0.min.js"' %}"></script>#}
+{#    <script src="{% static 'shop/js/vendor/jquery-migrate-3.3.2.min.js' %}"></script>#}
+{#    <script src="{% static 'shop/js/vendor/modernizr-3.11.2.min.js"' %}"></script>#}
+    <script src="{% static 'shop/js/plugins/jquery.countdown.min.js' %}"></script>
+{#    <script src="{% static 'shop/js/plugins/swiper-bundle.min.js"' %}"></script>#}
+    <script src="{% static 'shop/js/plugins/scrollUp.js' %}"></script>
+{#    <script src="{% static 'shop/js/plugins/venobox.min.js"' %}"></script>#}
+    <script src="{% static 'shop/js/plugins/jquery-ui.min.js' %}"></script>
+{#    <script src="{% static 'shop/js/plugins/mailchimp-ajax.js"' %}"></script>#}
+    <!--Main JS (Common Activation Codes)-->
+    <script src="{% static 'shop/js/main.js' %}"></script>
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}Кошик{% endblock %}
+{% block content %}
+    <div class="cart-main-area pt-100px pb-100px">
+            <div class="container">
+                <h3 class="cart-page-title">Товари в кошику</h3>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                        <form action="#">
+                            <div class="table-content table-responsive cart-table-content">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Фото</th>
+                                            <th>Товар</th>
+                                            <th>Ціна, UAH</th>
+                                            <th>Кількість</th>
+                                            <th>Разом, UAH</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for item in cart %}
+                                        {% with product=item.product %}
+                                        <tr>
+                                            <td class="product-thumbnail">
+                                                <a href="{{ product.get_absolute_url }}">
+                                                    <img class="img-responsive ml-15px"
+                                                        src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+                                                </a>
+                                            </td>
+                                            <td class="product-name"><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></td>
+                                            <td class="product-price-cart"><span class="amount">{{ item.price }}</span></td>
+                                            <td class="product-quantity">{{ item.quantity }}
+                                            </td>
+                                            <td class="product-subtotal">{{ item.total_price }}</td>
+                                            <td class="product-remove">
+                                                <a href="{% url "cart:cart_remove" product.id%}"><i class="fa fa-times"></i></a>
+                                            </td>
+                                        </tr>
+                                        {% endwith %}
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <div class="grand-totall">
+                                        <h4 class="grand-totall-title">Всього до сплати <span>UAH {{ cart.get_total_price }}</span></h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="cart-shiping-update-wrapper">
+                                        <div class="cart-shiping-update">
+                                            <a href="/">Продовжити покупки</a>
+                                        </div>
+                                        <div class="cart-clear">
+                                        {% if cart.get_total_price > 0 %}
+                                            {% if request.user.is_authenticated %}
+                                                <a href="{% url "orders:order_create" %}">Оформити замовлення</a>
+                                            {% else %}
+                                                <a href="{% url "shop:login" %}">Увійти до кабінету</a>
+                                            {% endif %}
+                                        {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}

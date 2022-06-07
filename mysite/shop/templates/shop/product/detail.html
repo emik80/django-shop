@@ -1,0 +1,55 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}
+{{ title }}
+{% endblock %}
+{% block content %}
+
+<div class="product-details-area pt-100px pb-100px">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-sm-12 col-xs-12 mb-lm-30px mb-md-30px mb-sm-30px">
+                        <!-- Swiper -->
+                        <div class="swiper-container zoom-top">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <img class="img-responsive m-auto" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "shop/images/no_image.png" %}{% endif %}" alt="">
+                                    <a class="venobox full-preview" data-gall="myGallery" href="{% if product.image %}{{ product.image.url }}{% else %}{% static "shop/images/no_image.png" %}{% endif %}">
+                                        <i class="fa fa-arrows-alt" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 col-xs-12" data-aos="fade-up" data-aos-delay="200">
+                        <div class="product-details-content quickview-content ml-25px">
+                            <h1>{{ product.name }}</h1>
+                            <p class="mt-30px">{{ product.description|linebreaks }}</p>
+                            <div class="pro-details-categories-info pro-details-same-style d-flex m-0">
+                                <span>SKU:</span>{{ product.sku }}
+                            </div>
+                            <div class="pro-details-categories-info pro-details-same-style d-flex m-0">
+                                <span>Категорія: </span> <a href="{{ product.category.get_absolute_url }}">{{ product.category }}</a>
+                            </div>
+                            <br>
+                            <div class="pricing-meta">
+                                <ul class="d-flex">
+                                    <li class="new-price">UAH {{ product.price }}</li>
+                                </ul>
+                            </div>
+                            <div class="pro-details-quality">
+                                <div class="pro-details-cart">
+                                    <form action="{% url "cart:cart_add" product.id %}" method="post">
+                                    {{ cart_product_form }}
+                                    {% csrf_token %}
+                                    <button type="submit" class="add-cart">Купити</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}

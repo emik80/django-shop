@@ -1,0 +1,53 @@
+{% extends "shop/base.html" %}
+{% block title %}Оформлення замовленя{% endblock %}
+{% block content %}
+<!-- checkout area start -->
+<div class="checkout-area pt-100px pb-100px">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-7">
+                <div class="billing-info-wrap">
+                    <h3>Контактна інформація</h3>
+                    <form action="." method="post" class="billing-info mb-4">{% csrf_token %}
+                        <p>{{ form.as_p }}</p>
+                </div>
+        </div>
+            <div class="col-lg-5 mt-md-30px mt-lm-30px ">
+                <div class="your-order-area">
+                    <h3>Ваше замовлення</h3>
+                    <div class="your-order-wrap gray-bg-4">
+                        <div class="your-order-product-info">
+                            <div class="your-order-top">
+                                <ul>
+                                    <li>Товар</li>
+                                    <li>Вартість, UAH</li>
+                                </ul>
+                            </div>
+                            <div class="your-order-middle">
+                                <ul>
+                                    {% for item in cart %}
+                                    <li><span class="order-middle-left">{{ item.product.name }} x {{ item.quantity }}</span> <span
+                                        class="order-price">{{ item.total_price }}</span></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <div class="your-order-total">
+                                <ul>
+                                    <li class="order-total">До сплати</li>
+                                    <li>UAH {{ cart.get_total_price }}</li>
+                                </ul>
+                            </div>
+                        <p><input type="submit" class="btn-blue" value="ОФОРМИТИ"></p>
+                        </div>
+                    </div>
+                    <div class="Place-order mt-25">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    </div>
+</div>
+<!-- checkout area end -->
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% load l10n %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+<div class="contact-area">
+    <div class="container">
+        <div class="contact-wrapper">
+            <div class="row">
+                <div class="col-12">
+                    <div class="contact-form">
+                        <div class="tab-pane fade active show" id="orders">
+                            <p class="title"><br><h2>Кабінет користувача <em>{{ user.username }}</em></h2><br></p>
+                            <div class="table_page table-responsive">
+                            {% if orders %}
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>№ Замовлення</th>
+                                            <th>Сумма, UAH</th>
+                                            <th>Оплата</th>
+                                            <th>ID платежу</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for item in orders %}
+                                            <tr>
+                                                <td>{{ item.id }}</td>
+                                                <td>{{ item.total_cost }}</td>
+                                                <td>
+                                                    {% if item.paid %}
+                                                        Оплачено
+                                                    {% else %}
+                                                        <script src="https://pay.fondy.eu/static_common/v1/checkout/ipsp.js"></script>
+                                                        <script>
+                                                            var button = $ipsp.get('button');
+                                                            button.setMerchantId(1396424);
+                                                            button.setAmount('{{ item.total_cost|unlocalize }}', 'UAH', true);
+                                                            button.setResponseUrl('https://4fb3-91-226-42-186.eu.ngrok.io/orders/fondy_callback/');
+                                                            button.setHost('pay.fondy.eu');
+                                                            button.addField({
+                                                                label: 'Замовлення #',
+                                                                name: 'description',
+                                                                value: '{{ item.id }}',
+                                                                readonly: true
+                                                            });
+                                                        </script>
+                                                        <button class="btn-blue" onclick="location.href=button.getUrl()">Оплатити</button>
+                                                    {% endif %}
+                                                </td>
+                                                <td>
+                                                    {% if item.paid %}
+                                                        {{ item.payment_id }}
+                                                    {% else %}
+                                                        <h6><strong>-</strong></h6>
+                                                    {% endif %}
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            {% else %}
+                            <div class="inner_complated">
+                            <p>У вас ще немає замовлень</p><p><br></p>
+                                <div class="btn_cmpted">
+                                    <a href="/" class="shop-btn" title="Go To Shop">За покупками</a>
+                                </div><p><br></p>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
