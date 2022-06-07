@@ -36,7 +36,8 @@
                                                             var button = $ipsp.get('button');
                                                             button.setMerchantId(1396424);
                                                             button.setAmount('{{ item.total_cost|unlocalize }}', 'UAH', true);
-                                                            button.setResponseUrl('https://4fb3-91-226-42-186.eu.ngrok.io/orders/fondy_callback/');
+                                                            <!-- put hear your domain url ============================================ -->
+                                                            button.setResponseUrl('https://yourdomainurl/orders/fondy_callback/');
                                                             button.setHost('pay.fondy.eu');
                                                             button.addField({
                                                                 label: 'Замовлення #',
