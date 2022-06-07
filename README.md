@@ -14,7 +14,7 @@ _Simple education project for e-shop on Python 3.10 + Django 3 + SQLite db._
 
 #### For correct usage you must do the following:
 
-1. Email settings for the contact form in the file /eshop/mysite/mysite/post_settings.py
+1. Input your email settings (I did it for Gmail, but you can choose your option) for the contact form in the file /eshop/mysite/mysite/post_settings.py
    * EMAIL_HOST_USER = 'youremail'
    * EMAIL_HOST_PASSWORD = 'yourpassword'
    * RECIPIENT_LIST = ['youremail1', 'youremail2', ] 
