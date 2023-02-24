@@ -21,4 +21,4 @@ _Simple education project for e-shop on Python 3.10 + Django 3 + SQLite db._
 2. In /eshop/mysite/mysite/shop/templates/shop/account.html (string #40) insert yor domain url for correct fondy callback
 
 
-_* Hmart – Electronics eCommerce HTML Template is used (for educational purposes< not for commerce use!!!)_
+_* Hmart – Electronics eCommerce HTML Template is used (for educational purposes, not for commerce use!!!)_
